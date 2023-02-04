@@ -71,8 +71,9 @@ const tick = () => {
   // mesh.rotation.y = elapsedTime;
 
   // Update camera
-  camera.position.x = cursor.x * 10;
-  camera.position.y = cursor.y * 10;
+  camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 2;
+  camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 2;
+  camera.position.y = cursor.y * 6;
   // camera.lookAt(new THREE.Vector3());
   camera.lookAt(mesh.position);
 
