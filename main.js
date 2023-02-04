@@ -1,17 +1,27 @@
 import "./style.css";
 import * as THREE from "three";
 
-/**
- * Base
- */
-// Canvas
-const canvas = document.querySelector("canvas.webgl");
-
 // Sizes
 const sizes = {
   width: 800,
   height: 600,
 };
+
+// Cursor features
+const cursor = {
+  x: 0,
+  y: 0,
+};
+globalThis.addEventListener("mousemove", (e) => {
+  cursor.x = e.clientX / sizes.width - 0.5;
+  cursor.y = -(e.clientY / sizes.height - 0.5);
+});
+
+/**
+ * Base
+ */
+// Canvas
+const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
@@ -41,7 +51,7 @@ const camera = new THREE.PerspectiveCamera(
 // );
 // camera.position.x = 2;
 // camera.position.y = 2;
-camera.position.z = 2;
+camera.position.z = 3;
 camera.lookAt(mesh.position);
 scene.add(camera);
 
@@ -59,6 +69,10 @@ const tick = () => {
 
   // Update objects
   // mesh.rotation.y = elapsedTime;
+
+  // Update camera
+  camera.position.x = cursor.x * 3;
+  camera.position.y = cursor.y * 3;
 
   // Render
   renderer.render(scene, camera);
